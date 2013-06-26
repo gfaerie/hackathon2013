@@ -1,7 +1,7 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
 public enum GameGraphics {
-	APPLE(100,5),ORANGE(100,4),BANANA(100,7),BRAIN(100,0),MIXER(100,0);
+	APPLE(100,6),ORANGE(100,3),BANANA(100,9),BRAIN(100,0),MIXER(100,0);
 	
 	private int size;
 	private int speed;

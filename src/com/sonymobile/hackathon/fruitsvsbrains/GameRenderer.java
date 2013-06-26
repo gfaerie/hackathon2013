@@ -10,12 +10,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 
 public class GameRenderer {
 	private Paint brush, scorePaint;
 	private Map<GameGraphics, Bitmap> graphicsMap = new LinkedHashMap<GameGraphics, Bitmap>();
+	private Bitmap background;
 
 	public GameRenderer(Context context) {
+		background = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruits);
 		Map<GameGraphics, Integer> loadMap = new LinkedHashMap<GameGraphics, Integer>();
 		loadMap.put(GameGraphics.APPLE, R.drawable.apple);
 		loadMap.put(GameGraphics.ORANGE, R.drawable.orange);
@@ -48,6 +51,9 @@ public class GameRenderer {
 	public void render(GameState gameState, Canvas canvas) {
 		float boardSize = Math.max(gameState.getxSize(),
 				gameState.getySize());
+		
+		canvas.drawBitmap(background, null, new RectF(0f,0f,(float)canvas.getWidth(),(float)canvas.getHeight()), null);
+
 		scorePaint.setTextSize(boardSize / 20.0f);
 		brush.setStrokeWidth(boardSize / 140.0f);
 		for (GameWall wall : gameState.getWalls()) {
