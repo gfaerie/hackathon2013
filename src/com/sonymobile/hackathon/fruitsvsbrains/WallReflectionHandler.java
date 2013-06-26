@@ -1,6 +1,5 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
-import android.util.Log;
 
 public class WallReflectionHandler  implements GameStateUpdater{
 
@@ -28,7 +27,6 @@ public class WallReflectionHandler  implements GameStateUpdater{
 
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
 		double distance = getDistanceToWall(gameObject, gameWall);
-		Log.d("fruit", "Distance to line is " + distance);
 		return distance < gameObject.getGameGraphics().getSize()
 				&& isMovingTowardsWall(distance, gameObject, gameWall);
 	}
@@ -67,7 +65,6 @@ public class WallReflectionHandler  implements GameStateUpdater{
 							(float) (gameObject.getPosition().getyPosition() + 0.1 * gameObject
 									.getGameMovement().getySpeed())),
 					gameWall.getStart(), gameWall.getEnd());
-			Log.d("fruit", "isMovingTowardsWall: " + (next < currentDistance));
 			return next < currentDistance;
 		}
 		return false;
@@ -97,14 +94,6 @@ public class WallReflectionHandler  implements GameStateUpdater{
 					* lineVector.getyPosition() - speedVector.getyPosition());
 			gameObject.setGameMovement(new GameMovement((float) newXspeed,
 					(float) newYspeed));
-			Log.d("fruits", "Normalize " + normalizedVector);
-			Log.d("fruits", "Dor product " + dot);
-			Log.d("fruits", "Speed vector " + speedVector);
-			Log.d("fruits", "Line vector " + lineVector);
-			Log.d("fruits", "Projection " + projectionScale);
-			Log.d("fruits", "Reflected object " + gameObject + " in "
-					+ gameWall);
-
 		}
 	}
 
