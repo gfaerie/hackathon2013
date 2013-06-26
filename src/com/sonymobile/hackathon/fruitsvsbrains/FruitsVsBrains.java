@@ -11,7 +11,7 @@ public class FruitsVsBrains extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gameRenderer = new GameRenderer();
+		gameRenderer = new GameRenderer(this);
 		gameView = new GameView(this, gameRenderer);
 		setContentView(gameView);
 	}
