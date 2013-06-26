@@ -20,6 +20,8 @@ public class GameRenderer {
 	public GameRenderer(Context context) {
 		Map<GameGraphics, Integer> loadMap = new LinkedHashMap<GameGraphics, Integer>();
 		loadMap.put(GameGraphics.APPLE, R.drawable.apple);
+		loadMap.put(GameGraphics.ORANGE, R.drawable.apple);
+		loadMap.put(GameGraphics.BANANA, R.drawable.apple);
 		loadMap.put(GameGraphics.BRAIN, R.drawable.brain);
 		loadMap.put(GameGraphics.MIXER, R.drawable.blender);
 		for (Entry<GameGraphics, Integer> graphics : loadMap.entrySet()) {

@@ -1,5 +1,6 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,9 +15,11 @@ public class GameView extends View {
 	private GameState state;
 	private GameRenderer renderer;
 	private long currentWall = -1;
+	private Random rand;
 
 	public GameView(Context context) {
 		super(context);
+		rand = new Random();
 	}
 
 	public void setGameRenderer(GameRenderer gameRenderer) {
@@ -99,13 +102,18 @@ public class GameView extends View {
 	        			currentWall = -1;
 	        		} else {
 	        			Log.i("fruits", "click");
-	        			long object = state.addObject(GameGraphics.APPLE, new GamePosition(x,y), GameObjectType.FRUIT);
-	        			state.getObject(object).setGameMovement(new GameMovement(5,5));
+	        			addFruit(x, y);
 	        		}
 	        	}
 	            break;
 	    }
 
 		return true;
+	}
+
+	private void addFruit(int x, int y) {
+		GameGraphics fruit = GameGraphics.values()[rand.nextInt(3)];
+		long object = state.addObject(fruit, new GamePosition(x,y), GameObjectType.FRUIT);
+		state.getObject(object).setGameMovement(new GameMovement(fruit.getSpeed(),fruit.getSpeed()));
 	}
 }
