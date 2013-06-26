@@ -41,9 +41,24 @@ public class WallReflectionHandler {
 
 	private double getDistanceToLine(GamePosition lineStart,
 			GamePosition lineEnd, GamePosition point) {
-		double dist = crossProduct(lineStart, lineEnd, point)
-				/ lineStart.distanceTo(lineEnd);
-		return Math.abs(dist);
+		double lineLength = lineEnd.distanceTo(lineStart);
+		double t = ((point.getxPosition() - lineStart.getxPosition())
+				* (lineStart.getxPosition() - lineEnd.getxPosition()) + (point
+				.getyPosition() - lineStart.getyPosition())
+				* (lineStart.getyPosition() - lineEnd.getyPosition()))
+				/ lineLength;
+		return point
+				.distanceTo(new GamePosition(
+						(float) (lineStart.getxPosition() + t
+								* (lineEnd.getxPosition() - lineStart
+										.getxPosition())), (float) (lineStart
+								.getyPosition() + t
+								* (lineEnd.getyPosition() - lineStart
+										.getyPosition()))));
+
+//		double dist = crossProduct(lineStart, lineEnd, point)
+//				/ lineStart.distanceTo(lineEnd);
+//		return Math.abs(dist);
 	}
 
 	private boolean isWithinCollisionArea(GameObject gameObject,
@@ -103,11 +118,6 @@ public class WallReflectionHandler {
 		}
 	}
 
-	private double dotProduct(GamePosition start, GamePosition endOne,
-			GamePosition endTwo) {
-		return dotProduct(start, endOne, start, endTwo);
-	}
-
 	private double dotProduct(GamePosition startOne, GamePosition endOne,
 			GamePosition startTwo, GamePosition endTwo) {
 		double[] matrixOne = new double[2];
@@ -122,6 +132,7 @@ public class WallReflectionHandler {
 
 	private double crossProduct(GamePosition start, GamePosition endOne,
 			GamePosition endTwo) {
+
 		double[] matrixOne = new double[2];
 		double[] matrixTwo = new double[2];
 		matrixOne[0] = endOne.getxPosition() - start.getxPosition();
