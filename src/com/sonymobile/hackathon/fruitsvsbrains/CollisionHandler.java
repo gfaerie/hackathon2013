@@ -80,14 +80,17 @@ public class CollisionHandler {
 					gameWall.getEnd().getyPosition()
 							- gameWall.getStart().getyPosition());
 
-			double projectionScale = dotProduct(origin, lineVector, origin,
+			float projectionScale = (float) (dotProduct(origin, lineVector, origin,
 					speedVector)
-					/ dotProduct(origin, lineVector, origin, lineVector);
-			double newXspeed = 2.0 * projectionScale
-					* lineVector.getxPosition() - speedVector.getxPosition();
-			double newYspeed = 2.0 * projectionScale
-					* lineVector.getyPosition() - speedVector.getyPosition();
+					/ dotProduct(origin, lineVector, origin, lineVector));
+			float newXspeed = (float) (2.0 * projectionScale
+					* lineVector.getxPosition() - speedVector.getxPosition());
+			float newYspeed = (float) (2.0 * projectionScale
+					* lineVector.getyPosition() - speedVector.getyPosition());
 			gameObject.setGameMovement(new GameMovement((float) newXspeed, (float) newYspeed));
+			Log.d("fruits", "Speed vector "+speedVector);
+			Log.d("fruits", "Line vector "+lineVector);
+			Log.d("fruits", "Projection "+projectionScale);
 			Log.d("fruits", "Reflected object "+gameObject+ " in "+gameWall);
 
 		}
