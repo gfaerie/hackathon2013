@@ -71,6 +71,6 @@ public class GameRenderer {
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
 		}
-		canvas.drawText("" + gameState.getScore(), 0, gameState.getySize(), scorePaint);
+		canvas.drawText("Remaining: " + gameState.getRemaining(), 0, gameState.getySize(), scorePaint);
 	}
 }

@@ -24,6 +24,7 @@ public class GameLevel {
 					2 * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
 			state.setMaxUserWalls(2);
+			state.setRemaining(3);
 
 			break;
 		case 2:
@@ -40,6 +41,7 @@ public class GameLevel {
 					3 * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
 			state.setMaxUserWalls(2);
+			state.setRemaining(5);
 
 			break;
 		}

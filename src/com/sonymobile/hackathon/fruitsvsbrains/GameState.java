@@ -19,8 +19,8 @@ public class GameState {
 
 	private Map<Long, GameWall> walls = new LinkedHashMap<Long, GameWall>();
 	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
-	private int maxUserWalls=1;
-	private int score = 0;
+	private int maxUserWalls = 1;
+	private int remaining = -1;
 	private int leveln = 0;
 	private List<GameStateUpdater> updaters = new LinkedList<GameStateUpdater>();
 
@@ -47,7 +47,7 @@ public class GameState {
 	public void newLevel(int leveln) {
 		walls.clear();
 		objects.clear();
-		score = 0;
+		remaining = 0;
 		this.leveln = leveln;
 	}
 
@@ -110,13 +110,17 @@ public class GameState {
 	}
 
 	public void increaseScore() {
-		this.score++;
-		if (score > 4) {
+		this.remaining--;
+		if (remaining == 0) {
 			GameLevel.buildLevel(leveln + 1, this);
 		}
 	}
 
-	public int getScore() {
-		return score;
+	public int getRemaining() {
+		return remaining;
+	}
+
+	public void setRemaining(int remain) {
+		remaining = remain;
 	}
 }
