@@ -61,7 +61,10 @@ public class GameRenderer {
 		}
 
 		for (GameObject obj : gameState.getObjects()) {
-			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj.getPosition().getxPosition(), obj.getPosition().getyPosition(), brush);
+			float diff = obj.getGameGraphics().getSize() / 2.0f;
+			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj
+					.getPosition().getxPosition() - diff, obj.getPosition()
+					.getyPosition() - diff, brush);
 		}
 		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
 				100, brush);
