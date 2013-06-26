@@ -19,17 +19,20 @@ public class GameState {
 	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
 	private GameStateReaper reaper;
 	private MovementHandler movementHandler;
+	private CollisionHandler collisionHandler;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.reaper = new GameStateReaper();
 		this.movementHandler = new MovementHandler();
+		this.collisionHandler= new CollisionHandler();
 	}
 
 	public void update() {
 		reaper.reapObjects(this);
 		movementHandler.moveObjects(this);
+		collisionHandler.handleCollisions(this);
 	}
 
 	public int getxSize() {
