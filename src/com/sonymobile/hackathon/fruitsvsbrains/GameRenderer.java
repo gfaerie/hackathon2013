@@ -2,6 +2,7 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,12 +17,27 @@ public class GameRenderer {
 	private Map<GameGraphics, Bitmap> graphicsMap = new LinkedHashMap<GameGraphics, Bitmap>();
 
 	public GameRenderer(Context context) {
-		graphicsMap.put(GameGraphics.APPLE, BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.apple));
-		graphicsMap.put(GameGraphics.BRAIN, BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.apple));
-		graphicsMap.put(GameGraphics.MIXER, BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.apple));
+		Map<GameGraphics, Integer> loadMap = new LinkedHashMap<GameGraphics, Integer>();
+		loadMap.put(GameGraphics.APPLE, R.drawable.apple);
+		loadMap.put(GameGraphics.BRAIN, R.drawable.apple);
+		loadMap.put(GameGraphics.MIXER, R.drawable.apple);
+		for (Entry<GameGraphics, Integer> graphics : loadMap.entrySet()) {
+			GameGraphics g = graphics.getKey();
+			Bitmap b = BitmapFactory.decodeResource(context.getResources(),
+					graphics.getValue());
+			float scale;
+			if (b.getHeight() > b.getWidth()) {
+				scale = (float) g.getSize() / (float) b.getHeight();
+			} else {
+				scale = (float) g.getSize() / (float) b.getWidth();
+			}
+			int newHeight = (int) (b.getHeight() * scale);
+			int newWidth = (int) (b.getWidth() * scale);
+
+			b = Bitmap.createScaledBitmap(b, newHeight, newWidth, true);
+			graphicsMap.put(g, b);
+		}
+
 		brush = new Paint();
 		brush.setAntiAlias(true);
 
@@ -41,6 +57,9 @@ public class GameRenderer {
 			canvas.drawLine(wall.getStart().getxPosition(), wall.getStart()
 					.getyPosition(), wall.getEnd().getxPosition(), wall
 					.getEnd().getyPosition(), brush);
+		}
+
+		for (GameObject obj : gameState.getObjects()) {
 		}
 		canvas.drawBitmap(graphicsMap.get(GameGraphics.APPLE), 0, 0, brush);
 		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
