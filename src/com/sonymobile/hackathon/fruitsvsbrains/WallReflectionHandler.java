@@ -30,7 +30,7 @@ public class WallReflectionHandler {
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
 		double distance = getDistanceToWall(gameObject, gameWall);
 		Log.d("fruit", "Distance to line is " + distance);
-		return getDistanceToWall(gameObject, gameWall) < gameObject
+		return distance < gameObject
 				.getGameGraphics().getSize();
 	}
 
@@ -69,6 +69,7 @@ public class WallReflectionHandler {
 							(float) (gameObject.getPosition().getyPosition() + 0.01 * gameObject
 									.getGameMovement().getySpeed())),
 					gameWall.getStart(), gameWall.getEnd());
+			Log.d("fruit", "isMovingTowardsWall: " + (next < currentDistance));
 			return next < currentDistance;
 		}
 		return false;
