@@ -29,7 +29,7 @@ public class GameView extends View {
 				postInvalidate();
 			}
 		};
-		timer.schedule(task, 1000, 10);
+		timer.schedule(task, 1000, 16);
 	}
 
 	public void pause() {
