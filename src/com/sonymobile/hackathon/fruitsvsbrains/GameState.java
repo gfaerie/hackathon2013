@@ -119,7 +119,7 @@ public class GameState {
 	public void increaseScore() {
 		this.currentScore++;
 		if (this.currentScore >=this.targetScore) {
-			newLevel(leveln);
+			newLevel(leveln+1);
 		}
 	}
 
