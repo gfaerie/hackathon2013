@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class GameRenderer {
 	private Bitmap bild;
@@ -60,8 +61,8 @@ public class GameRenderer {
 		}
 
 		for (GameObject obj : gameState.getObjects()) {
+			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj.getPosition().getxPosition(), obj.getPosition().getyPosition(), brush);
 		}
-		canvas.drawBitmap(graphicsMap.get(GameGraphics.APPLE), 0, 0, brush);
 		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
 				100, brush);
 	}
