@@ -8,6 +8,11 @@ public class GameOverUpdater implements GameStateUpdater {
 	@Override
 	public void update(final GameState gameState) {
 		if (gameState.getRemainingFruits() <= 0) {
+			for(GameObject g: gameState.getObjects()) {
+				if(g.getType() == GameObjectType.FRUIT) {
+					return;
+				}
+			}
 			FruitsVsBrains.MAIN_ACTIVITY.getGameView().pause();
 			AlertDialog.Builder builder = new AlertDialog.Builder(FruitsVsBrains.MAIN_ACTIVITY);
 			builder.setMessage(
