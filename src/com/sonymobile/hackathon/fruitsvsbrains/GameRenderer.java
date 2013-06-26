@@ -20,8 +20,8 @@ public class GameRenderer {
 	public GameRenderer(Context context) {
 		Map<GameGraphics, Integer> loadMap = new LinkedHashMap<GameGraphics, Integer>();
 		loadMap.put(GameGraphics.APPLE, R.drawable.apple);
-		loadMap.put(GameGraphics.BRAIN, R.drawable.apple);
-		loadMap.put(GameGraphics.MIXER, R.drawable.apple);
+		loadMap.put(GameGraphics.BRAIN, R.drawable.brain);
+		loadMap.put(GameGraphics.MIXER, R.drawable.blender);
 		for (Entry<GameGraphics, Integer> graphics : loadMap.entrySet()) {
 			GameGraphics g = graphics.getKey();
 			Bitmap b = BitmapFactory.decodeResource(context.getResources(),
