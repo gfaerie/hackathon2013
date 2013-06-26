@@ -19,6 +19,7 @@ public class GameRenderer {
 	}
 
 	public void render(GameState gameState, Canvas canvas) {
+		gameState.update();
 		for (GameWall wall : gameState.getWalls()) {
 			canvas.drawLine(wall.getStart().getxPosition(), wall.getStart()
 					.getyPosition(), wall.getEnd().getxPosition(), wall

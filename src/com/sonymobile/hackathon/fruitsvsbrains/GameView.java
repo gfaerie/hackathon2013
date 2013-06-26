@@ -60,7 +60,7 @@ public class GameView extends View {
 	        	if (currentWall == -1)
 	        		currentWall = state.addWall(new GamePosition((int)event.getX(), (int)event.getY()), GameWallType.IN_PROGRESS);
 	        	else
-	        		Log.i("fb", "invalid DOWN");
+	        		Log.i("fruits", "invalid DOWN");
 	            break;
 
 	        case MotionEvent.ACTION_MOVE:
@@ -69,14 +69,14 @@ public class GameView extends View {
 
 	        case MotionEvent.ACTION_UP:
 	        	if (currentWall != -1) {
-		        	Log.i("fb", "new line length=" + state.getWall(currentWall).getLength());
+	        		Log.i("fruits", "new line length=" + state.getWall(currentWall).getLength());
 		        	if (state.getWall(currentWall).getLength() < 50)
 		        		state.deleteWall(currentWall);
 		        	else
 		        		state.getWall(currentWall).setType(GameWallType.DONE);
 		        	currentWall = -1;
 	        	} else
-	        		Log.i("fb", "invalid UP");
+	        		Log.i("fruits", "invalid UP");
 	            break;
 	    }
 
