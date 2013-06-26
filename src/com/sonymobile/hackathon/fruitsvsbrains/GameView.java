@@ -76,7 +76,7 @@ public class GameView extends View {
 	            break;
 
 	        case MotionEvent.ACTION_MOVE:
-	        	if (!insideStartArea(x, y)) {
+	        	if (!insideStartArea(x, y) && currentWall != -1) {
 	        		state.getWall(currentWall).setEnd(new GamePosition(x, y));
 	        	}
 	        	break;
