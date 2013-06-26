@@ -23,7 +23,7 @@ public class GameState {
 	private int remainingFruits = Integer.MAX_VALUE;
 	private int targetScore = Integer.MAX_VALUE;
 	private int currentScore = 0;
-
+	
 	private int leveln = 0;
 	private List<GameStateUpdater> updaters = new LinkedList<GameStateUpdater>();
 

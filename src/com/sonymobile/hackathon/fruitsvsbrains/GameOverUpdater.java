@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 
 public class GameOverUpdater implements GameStateUpdater {
 
+	private boolean currentlyPause = false;
+	
 	@Override
 	public void update(final GameState gameState) {
 
@@ -18,7 +20,8 @@ public class GameOverUpdater implements GameStateUpdater {
 			}
 		}
 
-		if (gameOver || gameState.getLeveln() > GameLevel.MAX_LEVELS) {
+		if ((gameOver || gameState.getLeveln() > GameLevel.MAX_LEVELS) &&!currentlyPause) {
+			currentlyPause=true;
 			String mainString = gameOver ? "Game over!" : "Congratulations!";
 			FruitsVsBrains.MAIN_ACTIVITY.getGameView().pause();
 			AlertDialog.Builder builder = new AlertDialog.Builder(
@@ -37,6 +40,7 @@ public class GameOverUpdater implements GameStateUpdater {
 								public void onClick(DialogInterface dialog,
 										int id) {
 									gameState.newLevel(1);
+									currentlyPause=false;
 									FruitsVsBrains.MAIN_ACTIVITY.getGameView()
 											.resume();
 								}
