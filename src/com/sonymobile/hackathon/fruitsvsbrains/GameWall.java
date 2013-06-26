@@ -25,7 +25,9 @@ private static final AtomicLong ID_COUNTER = new AtomicLong();
 		return id;
 	}
 	
-	
+	public int getLength(){
+		return start.distanceTo(end);
+	}
 	
 	
 	

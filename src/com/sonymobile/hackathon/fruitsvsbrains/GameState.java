@@ -1,5 +1,6 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,12 +35,12 @@ public class GameState {
 		return ySize;
 	}
 
-	public Map<Long, GameWall> getWalls() {
-		return walls;
+	public Collection<GameWall> getWalls() {
+		return walls.values();
 	}
 
-	public Map<Long, GameObject> getObjects() {
-		return objects;
+	public Collection<GameObject> getObjects() {
+		return objects.values();
 	}
 
 	public void updateWallPosition(long id,GamePosition endPosition){
@@ -48,6 +49,18 @@ public class GameState {
 	
 	public void deleteWall(long id){
 		walls.remove(id);
+	}
+	
+	public void deleteObject(long id){
+		objects.remove(id);
+	}
+	
+	public GameWall getWall(long id){
+		return walls.get(id);
+	}
+	
+	public GameObject getObject(long id){
+		return objects.get(id);
 	}
 	
 	public long addWall(GamePosition startPosition){

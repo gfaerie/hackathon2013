@@ -17,5 +17,11 @@ public class GamePosition {
 	public int getyPosition() {
 		return yPosition;
 	}
+	
+	public int distanceTo(GamePosition gamePosition){
+		int xDiff =gamePosition.getxPosition()-xPosition;
+		int yDiff =gamePosition.getyPosition()-yPosition;
+		return (int) Math.round(Math.sqrt(xDiff*xDiff+yDiff*yDiff));
+	}
 
 }

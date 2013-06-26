@@ -57,7 +57,7 @@ public class GameView extends View {
 
 	    switch (event.getAction()) {
 	        case MotionEvent.ACTION_DOWN:
-	        	currentWall = state.addMobileWall(new GamePosition((int)event.getX(), (int)event.getY()));
+	        	currentWall = state.addWall(new GamePosition((int)event.getX(), (int)event.getY()));
 	        	x=event.getX();
 	        	y=event.getY();
 	            break;
