@@ -10,7 +10,8 @@ import android.view.View;
 
 public class GameView extends View {
 	private Timer timer;
-
+	private GameState gameState;
+		
 	public GameView(Context context) {
 		super(context);
 	}
@@ -34,6 +35,16 @@ public class GameView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawText("Fruits vs Brains: "+System.currentTimeMillis(), 100, 100, new Paint());
+	}
+	
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if (gameState == null) {
+			int canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
+			int canvasHeight = MeasureSpec.getSize(heightMeasureSpec);
+			gameState = new GameState(canvasWidth, canvasHeight);
+		}
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 	
 
