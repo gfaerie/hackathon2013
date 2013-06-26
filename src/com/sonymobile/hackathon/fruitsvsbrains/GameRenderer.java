@@ -28,9 +28,9 @@ public class GameRenderer {
 					graphics.getValue());
 			float scale;
 			if (b.getHeight() > b.getWidth()) {
-				scale = (float) g.getSize() / (float) b.getHeight();
+				scale = (float) g.getSize() * 2 / (float) b.getHeight();
 			} else {
-				scale = (float) g.getSize() / (float) b.getWidth();
+				scale = (float) g.getSize() * 2 / (float) b.getWidth();
 			}
 			int newHeight = (int) (b.getHeight() * scale);
 			int newWidth = (int) (b.getWidth() * scale);
@@ -61,12 +61,14 @@ public class GameRenderer {
 		}
 
 		for (GameObject obj : gameState.getObjects()) {
-			float diff = obj.getGameGraphics().getSize() / 2.0f;
+			float diff = obj.getGameGraphics().getSize();
+			float x = obj.getPosition().getxPosition() - diff;
+			float y = obj.getPosition().getyPosition() - diff;
+			canvas.drawCircle(obj.getPosition().getxPosition(), obj
+					.getPosition().getyPosition(), diff, brush);
 			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
 		}
-		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
-				100, brush);
 	}
 }
