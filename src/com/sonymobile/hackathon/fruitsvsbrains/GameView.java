@@ -55,33 +55,56 @@ public class GameView extends View {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
+	private boolean insideStartArea(int x, int y) {
+		if (x < 300 && y < 300)
+			return true;
+		return false;
+	}
+
 	public boolean onTouchEvent(MotionEvent event) {
+		int x = (int)event.getX();
+		int y = (int)event.getY();
+
 	    switch (event.getAction()) {
 	        case MotionEvent.ACTION_DOWN:
-	        	if (currentWall == -1)
-	        		currentWall = state.addWall(new GamePosition((int)event.getX(), (int)event.getY()), GameWallType.IN_PROGRESS);
-	        	else
-	        		Log.i("fruits", "invalid DOWN");
+	        	if (!insideStartArea(x, y)) {
+		        	if (currentWall == -1)
+		        		currentWall = state.addWall(new GamePosition(x, y), GameWallType.IN_PROGRESS);
+		        	else
+		        		Log.i("fruits", "invalid DOWN");
+	        	}
 	            break;
 
 	        case MotionEvent.ACTION_MOVE:
-	        	state.getWall(currentWall).setEnd(new GamePosition((int)event.getX(), (int)event.getY()));
-	            break;
+	        	if (!insideStartArea(x, y)) {
+	        		state.getWall(currentWall).setEnd(new GamePosition(x, y));
+	        	}
+	        	break;
 
 	        case MotionEvent.ACTION_UP:
-	        	if (currentWall != -1) {
-	        		Log.i("fruits", "new line length=" + state.getWall(currentWall).getLength());
-		        	if (state.getWall(currentWall).getLength() < 50)
-		        		state.deleteWall(currentWall);
-		        	else
-		        		state.getWall(currentWall).setType(GameWallType.DONE);
-		        	currentWall = -1;
-	        	} else
-	        		Log.i("fruits", "invalid UP");
+	        	if (!insideStartArea(x, y)) {
+		        	if (currentWall != -1) {
+		        		Log.i("fruits", "new line length=" + state.getWall(currentWall).getLength());
+			        	if (state.getWall(currentWall).getLength() < 50)
+			        		state.deleteWall(currentWall);
+			        	else
+			        		state.getWall(currentWall).setType(GameWallType.DONE);
+			        	currentWall = -1;
+		        	} else
+		        		Log.i("fruits", "invalid UP");
+	        	} else {
+	        		if (currentWall != -1) {
+	        			state.deleteWall(currentWall);
+	        			currentWall = -1;
+	        		} else {
+	        			Log.i("fruits", "click");
+	        			long object = state.addObject(GameGraphics.APPLE, new GamePosition(x,y), GameObjectType.FRUIT);
+	        			state.getObject(object).setGameMovement(new GameMovement(5,5));
+	        		}
+	        	}
 	            break;
 	    }
 
-		//TODO : Anders
 		return true;
 	}
 }
