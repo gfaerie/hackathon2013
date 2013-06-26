@@ -1,7 +1,9 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * //TODO : Mans
@@ -14,9 +16,13 @@ public class GameState {
 	private final int xSize;
 	private final int ySize;
 	
-	private List<GameWall> staticWalls = new LinkedList<GameWall>();
-	private List<GameWall> mobileWalls = new LinkedList<GameWall>();
+	
+	
+	private Map<Long,GameWall> walls = new LinkedHashMap<Long, GameWall>();
+	private Map<Long,GameObject> objects = new LinkedHashMap<Long, GameObject>();
 
+	
+	
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
@@ -30,21 +36,22 @@ public class GameState {
 		return ySize;
 	}
 
-	public List<GameWall> getStaticWalls() {
-		return staticWalls;
+	public Map<Long, GameWall> getWalls() {
+		return walls;
 	}
 
-	public List<GameWall> getMobileWalls() {
-		return mobileWalls;
+	public Map<Long, GameObject> getObjects() {
+		return objects;
+	}
+
+	public void updateWallPosition(long id,GamePosition endPosition){
+			walls.get(id).setEnd(endPosition);
+		
 	}
 	
-	public void updateLastWall(GamePosition endPosition){
-		if(!mobileWalls.isEmpty()){
-			mobileWalls.get(0).setEnd(endPosition);
-		}
-	}
-	
-	public void addMobileWall(GamePosition startPosition){
-		mobileWalls.add(new GameWall(startPosition, startPosition));
+	public long addMobileWall(GamePosition startPosition){
+		GameWall gameWall = new GameWall(startPosition, startPosition);
+		walls.put(gameWall.getId(), gameWall);
+		return gameWall.getId();
 	}
 }
