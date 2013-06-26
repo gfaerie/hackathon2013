@@ -2,17 +2,17 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 
 public class GameMovement {
 
-	private int xSpeed;
-	private int ySpeed;
-	public GameMovement(int xSpeed, int ySpeed) {
+	private float xSpeed;
+	private float ySpeed;
+	public GameMovement(float xSpeed, float ySpeed) {
 
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
 	}
-	public int getxSpeed() {
+	public float getxSpeed() {
 		return xSpeed;
 	}
-	public int getySpeed() {
+	public float getySpeed() {
 		return ySpeed;
 	}
 }
