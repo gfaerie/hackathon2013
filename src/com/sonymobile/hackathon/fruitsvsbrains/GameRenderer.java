@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class GameRenderer {
 	private Bitmap bild;
-	private Paint brush;
+	private Paint brush, scorePaint;
 	private Map<GameGraphics, Bitmap> graphicsMap = new LinkedHashMap<GameGraphics, Bitmap>();
 
 	public GameRenderer(Context context) {
@@ -41,12 +41,15 @@ public class GameRenderer {
 
 		brush = new Paint();
 		brush.setAntiAlias(true);
-
+		scorePaint = new Paint();
+		scorePaint.setColor(Color.BLUE);
 	}
 
 	public void render(GameState gameState, Canvas canvas) {
-		brush.setStrokeWidth(Math.max(gameState.getxSize(),
-				gameState.getySize()) / 200.0f);
+		float boardSize = Math.max(gameState.getxSize(),
+				gameState.getySize());
+		scorePaint.setTextSize(boardSize / 20.0f);
+		brush.setStrokeWidth(boardSize / 200.0f);
 		for (GameWall wall : gameState.getWalls()) {
 			if (wall.getType() == GameWallType.IN_PROGRESS) {
 				brush.setAlpha(100);
@@ -70,5 +73,6 @@ public class GameRenderer {
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
 		}
+		canvas.drawText("" + gameState.getScore(), 0, gameState.getySize(), scorePaint);
 	}
 }

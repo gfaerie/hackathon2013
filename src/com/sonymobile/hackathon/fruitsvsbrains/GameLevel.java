@@ -8,7 +8,7 @@ public class GameLevel {
 		float canvasWidth = state.getxSize();
 		float canvasHeight = state.getySize();
 
-		state.clear();
+		state.newLevel(leveln);
 
 		switch (leveln) {
 		case 1:
@@ -23,6 +23,21 @@ public class GameLevel {
 					GameObjectType.BRAIN);
 			state.addObject(GameGraphics.MIXER, new GamePosition(
 					2 * canvasWidth / 4, 3 * canvasHeight / 4),
+					GameObjectType.TARGET_CONTAINER);
+
+			break;
+		case 2:
+			state.addObject(GameGraphics.BRAIN, new GamePosition(
+					2 * canvasWidth / 4, 2 * canvasHeight / 4),
+					GameObjectType.BRAIN);
+			state.addObject(GameGraphics.BRAIN, new GamePosition(
+					canvasWidth / 4, 3 * canvasHeight / 4),
+					GameObjectType.BRAIN);
+			state.addObject(GameGraphics.BRAIN, new GamePosition(
+					3 * canvasWidth / 4, canvasHeight / 4),
+					GameObjectType.BRAIN);
+			state.addObject(GameGraphics.MIXER, new GamePosition(
+					3 * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
 
 			break;

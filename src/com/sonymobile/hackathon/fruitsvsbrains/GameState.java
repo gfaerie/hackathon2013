@@ -23,8 +23,9 @@ public class GameState {
 	private MixerHandler mixerHandler;
 	private BrainEaterHandler brainEaterHandler;
 	private WallReflectionHandler wallReflectionHandler;
-	private int score;
 	private int maxUserWalls=1;
+	private int score = 0;
+	private int leveln = 0;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
@@ -34,7 +35,7 @@ public class GameState {
 		this.movementHandler = new MovementHandler();
 		this.mixerHandler = new MixerHandler();
 		this.brainEaterHandler = new BrainEaterHandler();
-		this.wallReflectionHandler= new WallReflectionHandler();
+		this.wallReflectionHandler = new WallReflectionHandler();
 	}
 	
 	public int getMaxUserWalls() {
@@ -45,9 +46,11 @@ public class GameState {
 		this.maxUserWalls = maxUserWalls;
 	}
 
-	public void clear() {
+	public void newLevel(int leveln) {
 		walls.clear();
 		objects.clear();
+		score = 0;
+		this.leveln = leveln;
 	}
 
 	public void update() {
@@ -113,5 +116,12 @@ public class GameState {
 
 	public void increaseScore() {
 		this.score++;
+		if (score > 4) {
+			GameLevel.buildLevel(leveln + 1, this);
+		}
+	}
+
+	public int getScore() {
+		return score;
 	}
 }
