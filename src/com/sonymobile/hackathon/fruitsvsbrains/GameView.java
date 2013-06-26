@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -13,6 +14,7 @@ public class GameView extends View {
 	private Timer timer;
 	private GameState gameState;
 	private GameRenderer renderer;
+	private float x,y;
 
 	public GameView(Context context, GameRenderer gameRenderer) {
 		super(context);
@@ -51,9 +53,24 @@ public class GameView extends View {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
+		//Log.d("sb", "x: " + event.getX() + " y:" + event.getY());
+
+	    switch (event.getAction()) {
+	        case MotionEvent.ACTION_DOWN: 
+	        	x=event.getX();
+	        	y=event.getY();
+	            break;
+
+	        case MotionEvent.ACTION_MOVE:
+	            break;
+
+	        case MotionEvent.ACTION_UP:   
+	        	Log.i("fb", "new line xlen=" + (x - event.getX()) + " ylen=" + (y - event.getY()));
+	            break;
+	    }
 
 		//TODO : Anders
-		return super.onTouchEvent(event);
+		return true;
 	}
 
 }
