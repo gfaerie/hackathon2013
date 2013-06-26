@@ -12,9 +12,11 @@ import android.view.View;
 public class GameView extends View {
 	private Timer timer;
 	private GameState gameState;
+	private GameRenderer renderer;
 
-	public GameView(Context context) {
+	public GameView(Context context, GameRenderer gameRenderer) {
 		super(context);
+		this.renderer = gameRenderer;
 	}
 
 	public void resume() {
@@ -35,8 +37,7 @@ public class GameView extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
-				100, new Paint());
+		renderer.render(gameState, canvas);
 	}
 
 	@Override
@@ -50,6 +51,8 @@ public class GameView extends View {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
+
+		//TODO : Anders
 		return super.onTouchEvent(event);
 	}
 

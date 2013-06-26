@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 	//TODO : Mans
+ * //TODO : Mans
  * 
  * @author 23060208
- *
+ * 
  */
 public class GameState {
 
@@ -47,14 +47,4 @@ public class GameState {
 	public void addMobileWall(GamePosition startPosition){
 		mobileWalls.add(new GameWall(startPosition, startPosition));
 	}
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
 }
