@@ -7,16 +7,23 @@ public class GameOverUpdater implements GameStateUpdater {
 
 	@Override
 	public void update(final GameState gameState) {
-		if (gameState.getRemainingFruits() <= 0) {
+
+		boolean gameOver = gameState.getRemainingFruits() <= 0;
+		
+		if(gameOver){
 			for(GameObject g: gameState.getObjects()) {
 				if(g.getType() == GameObjectType.FRUIT) {
-					return;
+					gameOver=false;
 				}
 			}
+
+		
+		if (gameOver || gameState.getLeveln()>GameLevel.MAX_LEVELS) {
+			String mainString = gameOver? "Game over!" : "Congratulations!";
 			FruitsVsBrains.MAIN_ACTIVITY.getGameView().pause();
 			AlertDialog.Builder builder = new AlertDialog.Builder(FruitsVsBrains.MAIN_ACTIVITY);
 			builder.setMessage(
-					"Game over! Play a new game?")
+					mainString+" Play another game?")
 					.setCancelable(false)
 					.setNegativeButton("Exit",
 							new DialogInterface.OnClickListener() {
@@ -37,6 +44,7 @@ public class GameOverUpdater implements GameStateUpdater {
 			AlertDialog alert = builder.create();
 			alert.show();
 		}
+
 
 	}
 
