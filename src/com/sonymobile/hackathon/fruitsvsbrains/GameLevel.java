@@ -1,7 +1,15 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
-
 public class GameLevel {
+
+	public static void addWall(GameState state, GamePosition startPosition,
+			GamePosition endPosition) {
+		long id = state.addWall(startPosition, GameWallType.PREMANENT);
+		state.getWall(id).setEnd(endPosition);
+	}
+
+	public static void addEdgeWalls(GameState state) {
+	}
 
 	public static void buildLevel(int leveln, GameState state) {
 		float canvasWidth = state.getxSize();

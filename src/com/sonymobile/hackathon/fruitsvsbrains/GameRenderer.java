@@ -49,14 +49,14 @@ public class GameRenderer {
 		float boardSize = Math.max(gameState.getxSize(),
 				gameState.getySize());
 		scorePaint.setTextSize(boardSize / 20.0f);
-		brush.setStrokeWidth(boardSize / 200.0f);
+		brush.setStrokeWidth(boardSize / 140.0f);
 		for (GameWall wall : gameState.getWalls()) {
 			if (wall.getType() == GameWallType.IN_PROGRESS) {
 				brush.setAlpha(100);
 				brush.setColor(Color.CYAN);
 			} else {
 				brush.setAlpha(255);
-				brush.setColor(Color.BLACK);
+				brush.setColor(Color.GREEN);
 			}
 			canvas.drawLine(wall.getStart().getxPosition(), wall.getStart()
 					.getyPosition(), wall.getEnd().getxPosition(), wall
@@ -65,8 +65,8 @@ public class GameRenderer {
 
 		for (GameObject obj : gameState.getObjects()) {
 			float diff = obj.getGameGraphics().getSize();
-			canvas.drawCircle(obj.getPosition().getxPosition(), obj
-					.getPosition().getyPosition(), diff, brush);
+			/*canvas.drawCircle(obj.getPosition().getxPosition(), obj
+					.getPosition().getyPosition(), diff, brush);*/
 			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
