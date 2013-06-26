@@ -14,13 +14,18 @@ public class GameRenderer {
 		bild = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.apple);
 		brush = new Paint();
+		brush.setAntiAlias(true);
+		brush.setStrokeWidth(4);
 	}
 
 	public void render(GameState gameState, Canvas canvas) {
-
+		for (GameWall wall : gameState.getWalls()) {
+			canvas.drawLine(wall.getStart().getxPosition(), wall.getStart()
+					.getyPosition(), wall.getEnd().getxPosition(), wall
+					.getEnd().getyPosition(), brush);
+		}
 		canvas.drawBitmap(bild, 0, 0, brush);
 		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
 				100, new Paint());
 	}
-
 }
