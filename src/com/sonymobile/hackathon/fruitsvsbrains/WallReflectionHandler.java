@@ -23,7 +23,7 @@ public class WallReflectionHandler  implements GameStateUpdater{
 	}
 
 	private boolean isReflectable(GameWall gameWall) {
-		return gameWall.getType() == GameWallType.DONE;
+		return gameWall.getType() != GameWallType.IN_PROGRESS;
 	}
 
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
