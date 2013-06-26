@@ -28,7 +28,6 @@ public class GameRenderer {
 	}
 
 	public void render(GameState gameState, Canvas canvas) {
-		gameState.update();
 		brush.setStrokeWidth(Math.max(gameState.getxSize(),
 				gameState.getySize()) / 200.0f);
 		for (GameWall wall : gameState.getWalls()) {

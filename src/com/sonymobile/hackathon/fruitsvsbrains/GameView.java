@@ -41,6 +41,7 @@ public class GameView extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		state.update();
 		renderer.render(state, canvas);
 	}
 
