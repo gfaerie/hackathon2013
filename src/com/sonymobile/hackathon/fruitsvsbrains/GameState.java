@@ -24,6 +24,7 @@ public class GameState {
 	private BrainEaterHandler brainEaterHandler;
 	private WallReflectionHandler wallReflectionHandler;
 	private int score;
+	private int maxUserWalls=1;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
@@ -34,6 +35,14 @@ public class GameState {
 		this.mixerHandler = new MixerHandler();
 		this.brainEaterHandler = new BrainEaterHandler();
 		this.wallReflectionHandler= new WallReflectionHandler();
+	}
+	
+	public int getMaxUserWalls() {
+		return maxUserWalls;
+	}
+
+	public void setMaxUserWalls(int maxUserWalls) {
+		this.maxUserWalls = maxUserWalls;
 	}
 
 	public void clear() {
