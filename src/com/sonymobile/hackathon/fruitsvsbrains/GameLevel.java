@@ -1,6 +1,7 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
 public class GameLevel {
+	public static final int MAX_LEVELS = 3;
 
 	public static void addWall(GameState state, GamePosition startPosition,
 			GamePosition endPosition) {
@@ -77,6 +78,8 @@ public class GameLevel {
 			state.setMaxUserWalls(3);
 			state.setTargetScore(5);
 			state.setRemainingFruits(10);
+			break;
+		case MAX_LEVELS + 1:
 			break;
 		default:
 			break;
