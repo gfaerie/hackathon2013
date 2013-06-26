@@ -9,6 +9,13 @@ public class GameLevel {
 	}
 
 	public static void addEdgeWalls(GameState state) {
+		float boardSize = Math.max(state.getxSize(),
+				state.getySize());
+		float padding = boardSize / 100f;
+		GameLevel.addWall(state, new GamePosition(padding, padding), new GamePosition(state.getxSize() - padding, padding));
+		GameLevel.addWall(state, new GamePosition(padding, padding), new GamePosition(padding, state.getySize() - padding));
+		GameLevel.addWall(state, new GamePosition(state.getxSize() - padding, padding), new GamePosition(state.getxSize() - padding, state.getySize() - padding));
+		GameLevel.addWall(state, new GamePosition(padding, state.getySize() - padding), new GamePosition(state.getxSize() - padding, state.getySize() - padding));
 	}
 
 	public static void buildLevel(int leveln, GameState state) {
@@ -16,7 +23,7 @@ public class GameLevel {
 		float canvasHeight = state.getySize();
 
 		state.newLevel(leveln);
-
+		GameLevel.addEdgeWalls(state);
 		switch (leveln) {
 		case 1:
 			state.addObject(GameGraphics.BRAIN, new GamePosition(
@@ -34,7 +41,6 @@ public class GameLevel {
 			state.setMaxUserWalls(2);
 			state.setTargetScore(3);
 			state.setRemainingFruits(10);
-
 			break;
 		case 2:
 			state.addObject(GameGraphics.BRAIN, new GamePosition(
