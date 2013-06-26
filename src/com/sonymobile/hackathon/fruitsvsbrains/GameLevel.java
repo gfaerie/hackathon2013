@@ -24,6 +24,7 @@ public class GameLevel {
 			state.addObject(GameGraphics.MIXER, new GamePosition(
 					2 * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
+			state.setMaxUserWalls(2);
 
 			break;
 		case 2:
@@ -39,6 +40,7 @@ public class GameLevel {
 			state.addObject(GameGraphics.MIXER, new GamePosition(
 					3 * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
+			state.setMaxUserWalls(2);
 
 			break;
 		}
