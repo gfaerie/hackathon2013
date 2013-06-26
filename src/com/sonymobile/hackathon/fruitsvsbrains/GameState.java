@@ -33,6 +33,7 @@ public class GameState {
 		updaters.add(new MixerHandler());
 		updaters.add(new BrainEaterHandler());
 		updaters.add(new WallReflectionHandler());
+		updaters.add(new LineRemover());
 	}
 
 	public int getMaxUserWalls() {
