@@ -6,16 +6,17 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class GameView extends View {
 	private Timer timer;
 	private GameState gameState;
-		
+
 	public GameView(Context context) {
 		super(context);
 	}
-	
+
 	public void resume() {
 		timer = new Timer();
 		TimerTask task = new TimerTask() {
@@ -31,12 +32,13 @@ public class GameView extends View {
 		timer.cancel();
 		timer = null;
 	}
-	
+
 	@Override
 	protected void onDraw(Canvas canvas) {
-		canvas.drawText("Fruits vs Brains: "+System.currentTimeMillis(), 100, 100, new Paint());
+		canvas.drawText("Fruits vs Brains: " + System.currentTimeMillis(), 100,
+				100, new Paint());
 	}
-	
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		if (gameState == null) {
@@ -46,6 +48,11 @@ public class GameView extends View {
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
-	
+
+	public boolean onTouchEvent(MotionEvent event) {
+		
+		//TODO : Anders
+		return super.onTouchEvent(event);
+	}
 
 }
