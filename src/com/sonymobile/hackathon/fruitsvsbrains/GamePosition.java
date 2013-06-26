@@ -28,6 +28,25 @@ public class GamePosition {
 		xPosition+=x;
 		yPosition+=y;
 	}
+	
+	
+	public double dotProduct(GamePosition gamePosition){
+		return this.xPosition*gamePosition.getxPosition()+this.yPosition*gamePosition.getyPosition();
+	}
+	
+	public GamePosition add(GamePosition gamePosition){
+		return new GamePosition(this.xPosition+gamePosition.getxPosition(),this.yPosition+gamePosition.getyPosition());
+	}
+	
+	public GamePosition subtract(GamePosition gamePosition){
+		return new GamePosition(this.xPosition-gamePosition.getxPosition(),this.yPosition-gamePosition.getyPosition());
+	}
+	
+	public GamePosition scale(float scale){
+		return new GamePosition(this.xPosition*scale,this.yPosition*scale);
+	}
+	
+
 
 	@Override
 	public String toString() {
