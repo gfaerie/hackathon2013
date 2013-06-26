@@ -18,24 +18,27 @@ public class GameState {
 	private Map<Long, GameWall> walls = new LinkedHashMap<Long, GameWall>();
 	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
 	private GameStateReaper reaper;
-	private MovementHandler movementHandler;
-	private WallReflectionHandler collisionHandler;
 	private BrainAttractionHandler brainAttractionHandler;
+	private MovementHandler movementHandler;
+	private MixerHandler mixerHandler;
+	private WallReflectionHandler wallReflectionHandler;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.reaper = new GameStateReaper();
-		this.movementHandler = new MovementHandler();
-		this.collisionHandler = new WallReflectionHandler();
 		this.brainAttractionHandler = new BrainAttractionHandler(7500);
+		this.movementHandler = new MovementHandler();
+		this.mixerHandler = new MixerHandler();
+		this.wallReflectionHandler= new WallReflectionHandler();
 	}
 
 	public void update() {
 		reaper.reapObjects(this);
 		brainAttractionHandler.doBrainAttraction(this);
 		movementHandler.moveObjects(this);
-		collisionHandler.handleCollisions(this);
+		mixerHandler.handleMixer(this);
+		wallReflectionHandler.handleCollisions(this);
 	}
 
 	public int getxSize() {
