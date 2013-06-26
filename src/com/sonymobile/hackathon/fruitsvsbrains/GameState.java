@@ -23,6 +23,7 @@ public class GameState {
 	private MixerHandler mixerHandler;
 	private BrainEaterHandler brainEaterHandler;
 	private WallReflectionHandler wallReflectionHandler;
+	private int score;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
@@ -94,5 +95,9 @@ public class GameState {
 				&& gamePosition.getxPosition() < xSize
 				&& gamePosition.getyPosition() > 0
 				&& gamePosition.getyPosition() < ySize;
+	}
+
+	public void increaseScore() {
+		this.score++;
 	}
 }

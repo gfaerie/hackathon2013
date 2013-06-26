@@ -54,6 +54,7 @@ public class GameView extends View {
 			state.addObject(GameGraphics.BRAIN, new GamePosition(3*canvasWidth/4,3*canvasHeight/4), GameObjectType.BRAIN);
 			state.addObject(GameGraphics.BRAIN, new GamePosition(canvasWidth/4,3*canvasHeight/4), GameObjectType.BRAIN);
 			state.addObject(GameGraphics.BRAIN, new GamePosition(3*canvasWidth/4,canvasHeight/4), GameObjectType.BRAIN);
+			state.addObject(GameGraphics.MIXER, new GamePosition(2*canvasWidth/4,3*canvasHeight/4), GameObjectType.TARGET_CONTAINER);
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
