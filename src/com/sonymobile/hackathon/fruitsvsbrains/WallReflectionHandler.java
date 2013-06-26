@@ -2,7 +2,7 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 
 import android.util.Log;
 
-public class CollisionHandler {
+public class WallReflectionHandler {
 
 	public void handleCollisions(GameState gameState) {
 		for (GameObject gameObject : gameState.getObjects()) {
