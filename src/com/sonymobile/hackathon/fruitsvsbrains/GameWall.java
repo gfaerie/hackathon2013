@@ -47,6 +47,14 @@ private static final AtomicLong ID_COUNTER = new AtomicLong();
 	public int getLength(){
 		return start.distanceTo(end);
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "GameWall [id=" + id + ", start=" + start + ", end=" + end
+				+ ", type=" + type + "]";
+	}
 	
 	
 	

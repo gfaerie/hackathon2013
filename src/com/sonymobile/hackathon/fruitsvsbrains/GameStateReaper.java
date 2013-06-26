@@ -3,6 +3,8 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.util.Log;
+
 public class GameStateReaper {
 
 	public void reapObjects(GameState gameState) {
@@ -13,6 +15,7 @@ public class GameStateReaper {
 			}
 		}
 		for (Long id : toRemove) {
+			Log.d("fruits", "Removing object "+gameState.getObject(id));
 			gameState.deleteObject(id);
 		}
 	}

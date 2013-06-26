@@ -29,4 +29,12 @@ public class GamePosition {
 		yPosition+=y;
 	}
 
+	@Override
+	public String toString() {
+		return "GamePosition [xPosition=" + xPosition + ", yPosition="
+				+ yPosition + "]";
+	}
+	
+	
+
 }

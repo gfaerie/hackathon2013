@@ -1,5 +1,7 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
+import android.util.Log;
+
 public class CollisionHandler {
 
 	public void handleCollisions(GameState gameState) {
@@ -86,6 +88,7 @@ public class CollisionHandler {
 			double newYspeed = 2.0 * projectionScale
 					* lineVector.getyPosition() - speedVector.getyPosition();
 			gameObject.setGameMovement(new GameMovement((float) newXspeed, (float) newYspeed));
+			Log.d("fruits", "Reflected object "+gameObject+ " in "+gameWall);
 
 		}
 	}

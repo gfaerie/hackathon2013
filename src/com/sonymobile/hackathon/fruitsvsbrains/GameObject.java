@@ -49,6 +49,13 @@ public class GameObject {
 	public long getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "GameObject [id=" + id + ", gameGraphics=" + gameGraphics
+				+ ", position=" + position + ", type=" + type
+				+ ", gameMovement=" + gameMovement + "]";
+	}
 	
 	
 	

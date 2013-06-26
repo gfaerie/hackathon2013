@@ -15,4 +15,10 @@ public class GameMovement {
 	public float getySpeed() {
 		return ySpeed;
 	}
+	@Override
+	public String toString() {
+		return "GameMovement [xSpeed=" + xSpeed + ", ySpeed=" + ySpeed + "]";
+	}
+	
+	
 }
