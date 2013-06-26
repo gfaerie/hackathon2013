@@ -50,8 +50,6 @@ public class GameView extends View {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		
-		//TODO : Anders
 		return super.onTouchEvent(event);
 	}
 
