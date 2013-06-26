@@ -20,7 +20,10 @@ public class GameState {
 	private Map<Long, GameWall> walls = new LinkedHashMap<Long, GameWall>();
 	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
 	private int maxUserWalls = 1;
-	private int remaining = -1;
+	private int remainingFruits = Integer.MAX_VALUE;
+	private int targetScore = Integer.MAX_VALUE;
+	private int currentScore = 0;
+
 	private int leveln = 0;
 	private List<GameStateUpdater> updaters = new LinkedList<GameStateUpdater>();
 
@@ -47,7 +50,9 @@ public class GameState {
 	public void newLevel(int leveln) {
 		walls.clear();
 		objects.clear();
-		remaining = 0;
+		remainingFruits = 0;
+		targetScore = 0;
+		currentScore = 0;
 		this.leveln = leveln;
 	}
 
@@ -110,17 +115,41 @@ public class GameState {
 	}
 
 	public void increaseScore() {
-		this.remaining--;
-		if (remaining == 0) {
+		this.currentScore++;
+		if (this.currentScore >=this.targetScore) {
 			GameLevel.buildLevel(leveln + 1, this);
 		}
 	}
 
-	public int getRemaining() {
-		return remaining;
+	public int getRemainingFruits() {
+		return remainingFruits;
 	}
 
-	public void setRemaining(int remain) {
-		remaining = remain;
+	public int getTargetScore() {
+		return targetScore;
 	}
+
+	public int getCurrentScore() {
+		return currentScore;
+	}
+
+	public int getLeveln() {
+		return leveln;
+	}
+
+	public void setRemainingFruits(int remainingFruits) {
+		this.remainingFruits = remainingFruits;
+	}
+
+	public void setTargetScore(int targetScore) {
+		this.targetScore = targetScore;
+	}
+
+	public void setLeveln(int leveln) {
+		this.leveln = leveln;
+	}
+	
+	
+
+	
 }

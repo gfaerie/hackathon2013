@@ -71,6 +71,8 @@ public class GameRenderer {
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
 		}
-		canvas.drawText("Remaining: " + gameState.getRemaining(), 0, gameState.getySize(), scorePaint);
+		canvas.drawText("Fruits mixed: " + gameState.getCurrentScore()+"/"+gameState.getTargetScore(), 0, gameState.getySize(), scorePaint);
+		canvas.drawText("Remaining fruits: " + gameState.getRemainingFruits(), 100, gameState.getySize(), scorePaint);
+
 	}
 }
