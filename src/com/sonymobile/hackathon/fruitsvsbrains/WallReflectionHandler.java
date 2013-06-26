@@ -10,8 +10,7 @@ public class WallReflectionHandler {
 				for (GameWall gameWall : gameState.getWalls()) {
 					if (isReflectable(gameWall)
 							&& isWithinCollisionArea(gameObject, gameWall)
-							&& isWithinDistance(gameObject, gameWall)
-							&& isMovingTowardsWall(gameObject, gameWall)) {
+							&& isWithinDistance(gameObject, gameWall)) {
 						reflectInWall(gameObject, gameWall);
 					}
 				}
@@ -30,8 +29,8 @@ public class WallReflectionHandler {
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
 		double distance = getDistanceToWall(gameObject, gameWall);
 		Log.d("fruit", "Distance to line is " + distance);
-		return distance < gameObject
-				.getGameGraphics().getSize();
+		return distance < gameObject.getGameGraphics().getSize()
+				&& isMovingTowardsWall(distance, gameObject, gameWall);
 	}
 
 	private double getDistanceToWall(GameObject gameObject, GameWall gameWall) {
@@ -42,31 +41,30 @@ public class WallReflectionHandler {
 	private double getDistanceToLine(GamePosition lineStart,
 			GamePosition lineEnd, GamePosition point) {
 		double lineLength = lineEnd.distanceTo(lineStart);
-		double t = point.subtract(lineStart).dotProduct(lineEnd.subtract(lineStart))/(lineLength*lineLength);
-		GamePosition projection = lineStart.add(lineEnd.subtract(lineStart).scale((float) t));
-		return point
-				.distanceTo(projection);
-
-//		double dist = crossProduct(lineStart, lineEnd, point)
-//				/ lineStart.distanceTo(lineEnd);
-//		return Math.abs(dist);
+		double t = point.subtract(lineStart).dotProduct(
+				lineEnd.subtract(lineStart))
+				/ (lineLength * lineLength);
+		GamePosition projection = lineStart.add(lineEnd.subtract(lineStart)
+				.scale((float) t));
+		return point.distanceTo(projection);
 	}
 
 	private boolean isWithinCollisionArea(GameObject gameObject,
 			GameWall gameWall) {
-		double wallLength = gameWall.getLength()+gameObject.getGameGraphics().getSize();
+		double wallLength = gameWall.getLength()
+				+ gameObject.getGameGraphics().getSize();
 		return gameObject.getPosition().distanceTo(gameWall.getStart()) < wallLength
 				&& gameObject.getPosition().distanceTo(gameWall.getEnd()) < wallLength;
 	}
 
-	private boolean isMovingTowardsWall(GameObject gameObject, GameWall gameWall) {
+	private boolean isMovingTowardsWall(double currentDistance,
+			GameObject gameObject, GameWall gameWall) {
 		if (gameObject.getGameMovement() != null) {
-			double currentDistance = getDistanceToWall(gameObject, gameWall);
 			double next = getDistanceToLine(
 					new GamePosition(
-							(float) (gameObject.getPosition().getxPosition() + 0.01 * gameObject
+							(float) (gameObject.getPosition().getxPosition() + 0.1 * gameObject
 									.getGameMovement().getxSpeed()),
-							(float) (gameObject.getPosition().getyPosition() + 0.01 * gameObject
+							(float) (gameObject.getPosition().getyPosition() + 0.1 * gameObject
 									.getGameMovement().getySpeed())),
 					gameWall.getStart(), gameWall.getEnd());
 			Log.d("fruit", "isMovingTowardsWall: " + (next < currentDistance));
@@ -122,18 +120,6 @@ public class WallReflectionHandler {
 		return dot;
 	}
 
-	private double crossProduct(GamePosition start, GamePosition endOne,
-			GamePosition endTwo) {
-
-		double[] matrixOne = new double[2];
-		double[] matrixTwo = new double[2];
-		matrixOne[0] = endOne.getxPosition() - start.getxPosition();
-		matrixOne[1] = endOne.getyPosition() - start.getyPosition();
-		matrixTwo[0] = endTwo.getxPosition() - start.getxPosition();
-		matrixTwo[1] = endTwo.getyPosition() - start.getyPosition();
-		double cross = matrixOne[0] * matrixTwo[1] - matrixOne[1]
-				* matrixTwo[0];
-		return cross;
-	}
+	
 
 }
