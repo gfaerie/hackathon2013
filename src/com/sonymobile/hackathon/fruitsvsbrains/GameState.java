@@ -14,14 +14,10 @@ public class GameState {
 
 	private final int xSize;
 	private final int ySize;
-	
-	
-	
-	private Map<Long,GameWall> walls = new LinkedHashMap<Long, GameWall>();
-	private Map<Long,GameObject> objects = new LinkedHashMap<Long, GameObject>();
 
-	
-	
+	private Map<Long, GameWall> walls = new LinkedHashMap<Long, GameWall>();
+	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
+
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
@@ -43,29 +39,36 @@ public class GameState {
 		return objects.values();
 	}
 
-	public void updateWallPosition(long id,GamePosition endPosition){
-			walls.get(id).setEnd(endPosition);
+	public void updateWallPosition(long id, GamePosition endPosition) {
+		walls.get(id).setEnd(endPosition);
 	}
-	
-	public void deleteWall(long id){
+
+	public void deleteWall(long id) {
 		walls.remove(id);
 	}
-	
-	public void deleteObject(long id){
+
+	public void deleteObject(long id) {
 		objects.remove(id);
 	}
-	
-	public GameWall getWall(long id){
+
+	public GameWall getWall(long id) {
 		return walls.get(id);
 	}
-	
-	public GameObject getObject(long id){
+
+	public GameObject getObject(long id) {
 		return objects.get(id);
 	}
-	
-	public long addWall(GamePosition startPosition){
+
+	public long addWall(GamePosition startPosition) {
 		GameWall gameWall = new GameWall(startPosition, startPosition);
 		walls.put(gameWall.getId(), gameWall);
 		return gameWall.getId();
+	}
+
+	public boolean inSideGame(GamePosition gamePosition) {
+		return gamePosition.getxPosition() > 0
+				&& gamePosition.getxPosition() < xSize
+				&& gamePosition.getyPosition() > 0
+				&& gamePosition.getyPosition() < ySize;
 	}
 }
