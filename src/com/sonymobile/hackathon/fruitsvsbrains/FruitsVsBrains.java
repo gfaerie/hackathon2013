@@ -5,8 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 
 public class FruitsVsBrains extends Activity {
+	public static FruitsVsBrains MAIN_ACTIVITY;
+
 	private GameView gameView;
 	private GameRenderer gameRenderer;
+	
+	public FruitsVsBrains(){
+		MAIN_ACTIVITY=this;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,4 +41,10 @@ public class FruitsVsBrains extends Activity {
 		super.onPause();
 		gameView.pause();
 	}
+
+	public GameView getGameView() {
+		return gameView;
+	}
+	
+	
 }

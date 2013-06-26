@@ -37,6 +37,7 @@ public class GameState {
 		updaters.add(new BrainEaterHandler());
 		updaters.add(new WallReflectionHandler());
 		updaters.add(new LineRemover());
+		updaters.add(new GameOverUpdater());
 	}
 
 	public int getMaxUserWalls() {
@@ -117,8 +118,14 @@ public class GameState {
 	public void increaseScore() {
 		this.currentScore++;
 		if (this.currentScore >=this.targetScore) {
-			GameLevel.buildLevel(leveln + 1, this);
+			leveln+=1;
+			setLevel(leveln);
 		}
+	}
+	
+	public void setLevel(int level){
+		GameLevel.buildLevel(level, this);
+
 	}
 
 	public int getRemainingFruits() {

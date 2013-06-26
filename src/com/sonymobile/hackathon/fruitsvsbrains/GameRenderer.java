@@ -77,6 +77,6 @@ public class GameRenderer {
 					.getPosition().getxPosition() - diff, obj.getPosition()
 					.getyPosition() - diff, brush);
 		}
-		canvas.drawText("S:" + gameState.getCurrentScore()+" G:"+gameState.getTargetScore()+" F:"+gameState.getRemainingFruits(), 0, gameState.getySize(), scorePaint);
+		canvas.drawText("Level: " + gameState.getLeveln()+" Score :" + gameState.getCurrentScore()+" Fruits: "+gameState.getRemainingFruits(), 25, gameState.getySize(), scorePaint);
 	}
 }
