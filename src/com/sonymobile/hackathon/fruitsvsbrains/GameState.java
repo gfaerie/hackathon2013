@@ -21,6 +21,7 @@ public class GameState {
 	private BrainAttractionHandler brainAttractionHandler;
 	private MovementHandler movementHandler;
 	private MixerHandler mixerHandler;
+	private BrainEaterHandler brainEaterHandler;
 	private WallReflectionHandler wallReflectionHandler;
 
 	public GameState(int xSize, int ySize) {
@@ -30,6 +31,7 @@ public class GameState {
 		this.brainAttractionHandler = new BrainAttractionHandler(7500);
 		this.movementHandler = new MovementHandler();
 		this.mixerHandler = new MixerHandler();
+		this.brainEaterHandler = new BrainEaterHandler();
 		this.wallReflectionHandler= new WallReflectionHandler();
 	}
 
@@ -38,6 +40,7 @@ public class GameState {
 		brainAttractionHandler.doBrainAttraction(this);
 		movementHandler.moveObjects(this);
 		mixerHandler.handleMixer(this);
+		brainEaterHandler.handleBrains(this);
 		wallReflectionHandler.handleCollisions(this);
 	}
 
