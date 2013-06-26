@@ -9,6 +9,7 @@ public class CollisionHandler {
 			if (isReflectable(gameObject)) {
 				for (GameWall gameWall : gameState.getWalls()) {
 					if (isReflectable(gameWall)
+							&& isWithinCollisionArea(gameObject, gameWall)
 							&& isWithinDistance(gameObject, gameWall)
 							&& isMovingTowardsWall(gameObject, gameWall)) {
 						reflectInWall(gameObject, gameWall);
@@ -28,7 +29,7 @@ public class CollisionHandler {
 
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
 		double distance = getDistanceToWall(gameObject, gameWall);
-		Log.d("fruit", "Distance to line is "+distance);
+		Log.d("fruit", "Distance to line is " + distance);
 		return getDistanceToWall(gameObject, gameWall) < gameObject
 				.getGameGraphics().getSize();
 	}
@@ -38,19 +39,18 @@ public class CollisionHandler {
 				gameWall.getEnd());
 	}
 
-	private double getDistanceToLine(
-			GamePosition lineStart, GamePosition lineEnd,GamePosition point) {
+	private double getDistanceToLine(GamePosition lineStart,
+			GamePosition lineEnd, GamePosition point) {
 		double dist = crossProduct(lineStart, lineEnd, point)
 				/ lineStart.distanceTo(lineEnd);
-		double dot1 = dotProduct(lineStart, lineEnd, point);
-		if (dot1 > 0) {
-			return lineEnd.distanceTo(point);
-		}
-		double dot2 = dotProduct(lineEnd, lineStart, point);
-		if (dot2 > 0) {
-			return lineStart.distanceTo(point);
-		}
 		return Math.abs(dist);
+	}
+
+	private boolean isWithinCollisionArea(GameObject gameObject,
+			GameWall gameWall) {
+		double wallLength = gameWall.getLength();
+		return gameObject.getPosition().distanceTo(gameWall.getStart()) < wallLength
+				&& gameObject.getPosition().distanceTo(gameWall.getEnd()) < wallLength;
 	}
 
 	private boolean isMovingTowardsWall(GameObject gameObject, GameWall gameWall) {
@@ -82,20 +82,23 @@ public class CollisionHandler {
 					gameWall.getEnd().getyPosition()
 							- gameWall.getStart().getyPosition());
 
-			double normalizedVector = dotProduct(origin, lineVector, origin, lineVector);
+			double normalizedVector = dotProduct(origin, lineVector, origin,
+					lineVector);
 			double dot = dotProduct(origin, speedVector, origin, lineVector);
-			float projectionScale = (float) (dot/normalizedVector);
+			float projectionScale = (float) (dot / normalizedVector);
 			float newXspeed = (float) (2.0 * projectionScale
 					* lineVector.getxPosition() - speedVector.getxPosition());
 			float newYspeed = (float) (2.0 * projectionScale
 					* lineVector.getyPosition() - speedVector.getyPosition());
-			gameObject.setGameMovement(new GameMovement((float) newXspeed, (float) newYspeed));
-			Log.d("fruits", "Normalize "+normalizedVector);
-			Log.d("fruits", "Dor product "+dot);
-			Log.d("fruits", "Speed vector "+speedVector);
-			Log.d("fruits", "Line vector "+lineVector);
-			Log.d("fruits", "Projection "+projectionScale);
-			Log.d("fruits", "Reflected object "+gameObject+ " in "+gameWall);
+			gameObject.setGameMovement(new GameMovement((float) newXspeed,
+					(float) newYspeed));
+			Log.d("fruits", "Normalize " + normalizedVector);
+			Log.d("fruits", "Dor product " + dot);
+			Log.d("fruits", "Speed vector " + speedVector);
+			Log.d("fruits", "Line vector " + lineVector);
+			Log.d("fruits", "Projection " + projectionScale);
+			Log.d("fruits", "Reflected object " + gameObject + " in "
+					+ gameWall);
 
 		}
 	}
