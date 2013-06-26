@@ -27,6 +27,8 @@ public class CollisionHandler {
 	}
 
 	private boolean isWithinDistance(GameObject gameObject, GameWall gameWall) {
+		double distance = getDistanceToWall(gameObject, gameWall);
+		Log.d("fruit", "Distance to line is "+distance);
 		return getDistanceToWall(gameObject, gameWall) < gameObject
 				.getGameGraphics().getSize();
 	}
@@ -36,8 +38,8 @@ public class CollisionHandler {
 				gameWall.getEnd());
 	}
 
-	private double getDistanceToLine(GamePosition point,
-			GamePosition lineStart, GamePosition lineEnd) {
+	private double getDistanceToLine(
+			GamePosition lineStart, GamePosition lineEnd,GamePosition point) {
 		double dist = crossProduct(lineStart, lineEnd, point)
 				/ lineStart.distanceTo(lineEnd);
 		double dot1 = dotProduct(lineStart, lineEnd, point);
@@ -81,7 +83,7 @@ public class CollisionHandler {
 							- gameWall.getStart().getyPosition());
 
 			double normalizedVector = dotProduct(origin, lineVector, origin, lineVector);
-			double dot = dotProduct(origin, lineVector, origin, lineVector);
+			double dot = dotProduct(origin, speedVector, origin, lineVector);
 			float projectionScale = (float) (dot/normalizedVector);
 			float newXspeed = (float) (2.0 * projectionScale
 					* lineVector.getxPosition() - speedVector.getxPosition());
