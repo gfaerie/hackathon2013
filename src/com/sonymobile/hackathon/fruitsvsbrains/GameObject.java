@@ -9,12 +9,21 @@ public class GameObject {
 	private GameGraphics gameGraphics;
 	private GamePosition position;
 	private GameObjectType type;
+	private GameMovement gameMovement;
 	
 	public GameObject(GameGraphics gameGraphics, GamePosition position,
 			GameObjectType type) {
 		this.gameGraphics = gameGraphics;
 		this.position = position;
 		this.type = type;
+	}
+	
+	public GameMovement getGameMovement() {
+		return gameMovement;
+	}
+
+	public void setGameMovement(GameMovement gameMovement) {
+		this.gameMovement = gameMovement;
 	}
 
 	public GameObjectType getType() {
