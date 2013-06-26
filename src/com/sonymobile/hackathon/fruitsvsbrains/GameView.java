@@ -56,7 +56,7 @@ public class GameView extends View {
 			int canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
 			int canvasHeight = MeasureSpec.getSize(heightMeasureSpec);
 			state = new GameState(canvasWidth, canvasHeight);
-			GameLevel.buildLevel(1, state);
+			state.newLevel(1);
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
