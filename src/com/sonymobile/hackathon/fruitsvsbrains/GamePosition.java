@@ -23,5 +23,10 @@ public class GamePosition {
 		int yDiff =gamePosition.getyPosition()-yPosition;
 		return (int) Math.round(Math.sqrt(xDiff*xDiff+yDiff*yDiff));
 	}
+	
+	public void move(int x, int y){
+		xPosition+=x;
+		yPosition+=y;
+	}
 
 }
