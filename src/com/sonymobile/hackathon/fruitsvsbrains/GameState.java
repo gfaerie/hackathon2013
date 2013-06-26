@@ -64,6 +64,12 @@ public class GameState {
 		return objects.get(id);
 	}
 
+	public long addObject(GameGraphics graphics, GamePosition position, GameObjectType type) {
+		GameObject gameObject = new GameObject(graphics, position, type);
+		objects.put(gameObject.getId(), gameObject);
+		return gameObject.getId();
+	}
+
 	public long addWall(GamePosition startPosition, GameWallType type) {
 		GameWall gameWall = new GameWall(startPosition, startPosition, type);
 		walls.put(gameWall.getId(), gameWall);
