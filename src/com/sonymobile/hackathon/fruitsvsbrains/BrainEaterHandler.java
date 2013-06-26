@@ -3,9 +3,9 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BrainEaterHandler {
+public class BrainEaterHandler  implements GameStateUpdater{
 
-	public void handleBrains(GameState gameState) {
+	public void update(GameState gameState) {
 		List<GameObject> brains = new LinkedList<GameObject>();
 		List<GameObject> fruits = new LinkedList<GameObject>();
 		for (GameObject gameObject : gameState.getObjects()) {

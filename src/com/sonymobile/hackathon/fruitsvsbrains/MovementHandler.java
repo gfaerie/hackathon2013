@@ -1,8 +1,8 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
-public class MovementHandler {
+public class MovementHandler implements GameStateUpdater {
 
-	public void moveObjects(GameState gameState) {
+	public void update(GameState gameState) {
 		for (GameObject gameObject : gameState.getObjects()) {
 			if (gameObject.getGameMovement() != null) {
 				gameObject.getPosition().move(

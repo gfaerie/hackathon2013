@@ -2,6 +2,8 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,27 +19,22 @@ public class GameState {
 
 	private Map<Long, GameWall> walls = new LinkedHashMap<Long, GameWall>();
 	private Map<Long, GameObject> objects = new LinkedHashMap<Long, GameObject>();
-	private GameStateReaper reaper;
-	private BrainAttractionHandler brainAttractionHandler;
-	private MovementHandler movementHandler;
-	private MixerHandler mixerHandler;
-	private BrainEaterHandler brainEaterHandler;
-	private WallReflectionHandler wallReflectionHandler;
 	private int maxUserWalls=1;
 	private int score = 0;
 	private int leveln = 0;
+	private List<GameStateUpdater> updaters = new LinkedList<GameStateUpdater>();
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
-		this.reaper = new GameStateReaper();
-		this.brainAttractionHandler = new BrainAttractionHandler(7500);
-		this.movementHandler = new MovementHandler();
-		this.mixerHandler = new MixerHandler();
-		this.brainEaterHandler = new BrainEaterHandler();
-		this.wallReflectionHandler = new WallReflectionHandler();
+		updaters.add(new GameStateReaper());
+		updaters.add(new BrainAttractionHandler(7500));
+		updaters.add(new MovementHandler());
+		updaters.add(new MixerHandler());
+		updaters.add(new BrainEaterHandler());
+		updaters.add(new WallReflectionHandler());
 	}
-	
+
 	public int getMaxUserWalls() {
 		return maxUserWalls;
 	}
@@ -54,12 +51,9 @@ public class GameState {
 	}
 
 	public void update() {
-		reaper.reapObjects(this);
-		brainAttractionHandler.doBrainAttraction(this);
-		movementHandler.moveObjects(this);
-		mixerHandler.handleMixer(this);
-		brainEaterHandler.handleBrains(this);
-		wallReflectionHandler.handleCollisions(this);
+		for (GameStateUpdater updater : updaters) {
+			updater.update(this);
+		}
 	}
 
 	public int getxSize() {

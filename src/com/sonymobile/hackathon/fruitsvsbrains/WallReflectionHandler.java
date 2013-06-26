@@ -2,9 +2,9 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 
 import android.util.Log;
 
-public class WallReflectionHandler {
+public class WallReflectionHandler  implements GameStateUpdater{
 
-	public void handleCollisions(GameState gameState) {
+	public void update(GameState gameState) {
 		for (GameObject gameObject : gameState.getObjects()) {
 			if (isReflectable(gameObject)) {
 				for (GameWall gameWall : gameState.getWalls()) {

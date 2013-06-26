@@ -5,9 +5,9 @@ import java.util.Set;
 
 import android.util.Log;
 
-public class GameStateReaper {
+public class GameStateReaper  implements GameStateUpdater{
 
-	public void reapObjects(GameState gameState) {
+	public void update(GameState gameState) {
 		Set<Long> toRemove = new HashSet<Long>();
 		for (GameObject gameObject : gameState.getObjects()) {
 			if (!gameState.inSideGame(gameObject.getPosition())) {

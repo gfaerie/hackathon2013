@@ -3,8 +3,8 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MixerHandler {
-	public void handleMixer(GameState gameState) {
+public class MixerHandler  implements GameStateUpdater{
+	public void update(GameState gameState) {
 		List<GameObject> mixers = new LinkedList<GameObject>();
 		List<GameObject> fruits = new LinkedList<GameObject>();
 		for (GameObject gameObject : gameState.getObjects()) {

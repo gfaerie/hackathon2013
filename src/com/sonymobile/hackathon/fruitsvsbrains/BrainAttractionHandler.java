@@ -3,7 +3,7 @@ package com.sonymobile.hackathon.fruitsvsbrains;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BrainAttractionHandler {
+public class BrainAttractionHandler implements GameStateUpdater{
 
 	public double staticScaleFactor;
 
@@ -11,7 +11,7 @@ public class BrainAttractionHandler {
 		this.staticScaleFactor = staticScaleFactor;
 	}
 
-	public void doBrainAttraction(GameState gameState) {
+	public void update(GameState gameState) {
 		List<GameObject> brains = new LinkedList<GameObject>();
 		List<GameObject> fruits = new LinkedList<GameObject>();
 		for (GameObject gameObject : gameState.getObjects()) {
