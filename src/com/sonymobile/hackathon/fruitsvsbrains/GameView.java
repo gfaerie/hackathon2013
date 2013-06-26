@@ -67,7 +67,10 @@ public class GameView extends View {
 	            break;
 
 	        case MotionEvent.ACTION_UP:
-	        	Log.i("fb", "new line xlen=" + (x - event.getX()) + " ylen=" + (y - event.getY()));
+	        	Log.i("fb", "new line length=" + state.getWall(currentWall).getLength());
+	        	if (state.getWall(currentWall).getLength() < 50) {
+	        		state.deleteWall(currentWall);
+	        	}
 	            break;
 	    }
 
