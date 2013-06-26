@@ -39,10 +39,6 @@ public class GameState {
 		return objects.values();
 	}
 
-	public void updateWallPosition(long id, GamePosition endPosition) {
-		walls.get(id).setEnd(endPosition);
-	}
-
 	public void deleteWall(long id) {
 		walls.remove(id);
 	}
@@ -59,8 +55,8 @@ public class GameState {
 		return objects.get(id);
 	}
 
-	public long addWall(GamePosition startPosition) {
-		GameWall gameWall = new GameWall(startPosition, startPosition);
+	public long addWall(GamePosition startPosition, GameWallType type) {
+		GameWall gameWall = new GameWall(startPosition, startPosition, type);
 		walls.put(gameWall.getId(), gameWall);
 		return gameWall.getId();
 	}
