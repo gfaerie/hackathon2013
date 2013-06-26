@@ -1,7 +1,7 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
 public class GameLevel {
-	public static final int MAX_LEVELS = 3;
+	public static final int MAX_LEVELS = 4;
 
 	public static void addWall(GameState state, GamePosition startPosition,
 			GamePosition endPosition) {
@@ -10,18 +10,28 @@ public class GameLevel {
 	}
 
 	public static void addEdgeWalls(GameState state) {
-		float boardSize = Math.max(state.getxSize(),
-				state.getySize());
+		float boardSize = Math.max(state.getxSize(), state.getySize());
 		float padding = boardSize / 100f;
-		GameLevel.addWall(state, new GamePosition(padding, padding), new GamePosition(state.getxSize() - padding, padding));
-		GameLevel.addWall(state, new GamePosition(padding, padding), new GamePosition(padding, state.getySize() - padding));
-		GameLevel.addWall(state, new GamePosition(state.getxSize() - padding, padding), new GamePosition(state.getxSize() - padding, state.getySize() - padding));
-		GameLevel.addWall(state, new GamePosition(padding, state.getySize() - padding), new GamePosition(state.getxSize() - padding, state.getySize() - padding));
+		GameLevel.addWall(state, new GamePosition(padding, padding),
+				new GamePosition(state.getxSize() - padding, padding));
+		GameLevel.addWall(state, new GamePosition(padding, padding),
+				new GamePosition(padding, state.getySize() - padding));
+		GameLevel.addWall(state, new GamePosition(state.getxSize() - padding,
+				padding),
+				new GamePosition(state.getxSize() - padding, state.getySize()
+						- padding));
+		GameLevel.addWall(state, new GamePosition(padding, state.getySize()
+				- padding),
+				new GamePosition(state.getxSize() - padding, state.getySize()
+						- padding));
 	}
 
 	public static void buildLevel(int leveln, GameState state) {
 		float canvasWidth = state.getxSize();
 		float canvasHeight = state.getySize();
+		float boardSize = Math.max(state.getxSize(), state.getySize());
+		float padding = boardSize / 100f;
+
 		switch (leveln) {
 		case 1:
 			GameLevel.addEdgeWalls(state);
@@ -72,6 +82,22 @@ public class GameLevel {
 					GameObjectType.BRAIN);
 			state.addObject(GameGraphics.MIXER, new GamePosition(
 					2.5f * canvasWidth / 4, 1.5f * canvasHeight / 4),
+					GameObjectType.TARGET_CONTAINER);
+			state.setMaxUserWalls(3);
+			state.setTargetScore(5);
+			state.setRemainingFruits(10);
+			break;
+		case 4:
+			GameLevel.addWall(state, new GamePosition(state.getxSize() * 2 / 6,
+					state.getySize() / 2), new GamePosition(
+					state.getxSize() * 4 / 6, state.getySize() / 2));
+
+			state.addObject(GameGraphics.BRAIN, new GamePosition(
+					canvasWidth * 3 / 8, 3 * canvasHeight / 4),
+					GameObjectType.BRAIN);
+
+			state.addObject(GameGraphics.MIXER, new GamePosition(
+					2.5f * canvasWidth / 4, 3 * canvasHeight / 4),
 					GameObjectType.TARGET_CONTAINER);
 			state.setMaxUserWalls(3);
 			state.setTargetScore(5);
