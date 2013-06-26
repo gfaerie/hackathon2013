@@ -1,27 +1,21 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import android.util.Log;
+import java.util.LinkedList;
+import java.util.List;
 
 public class LineRemover  implements GameStateUpdater{
 
 	public void update(GameState gameState){
-		int nrWalls=0; 
-		Set<Long> toRemove = new HashSet<Long>();
+		List<Long> walls = new LinkedList<Long>();
 		for(GameWall gameWall : gameState.getWalls()){
 			if(gameWall.getType()==GameWallType.DONE){
-				nrWalls++;
-				if(nrWalls>gameState.getMaxUserWalls()){
-					toRemove.add(gameWall.getId());
-				}
+					walls.add(gameWall.getId());
+				
 			}
 		}
 		
-		for (Long id : toRemove) {
-			Log.d("fruits", "Removing wall "+gameState.getObject(id));
-			gameState.deleteWall(id);
+		for (int i=0;i<walls.size()-gameState.getMaxUserWalls();i++) {
+			gameState.deleteWall(walls.get(i));
 		}
 	}
 	

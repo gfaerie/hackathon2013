@@ -1,6 +1,5 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
-import java.util.ArrayList;
 
 public class GameLevel {
 

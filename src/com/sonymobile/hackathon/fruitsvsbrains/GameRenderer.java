@@ -10,10 +10,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 public class GameRenderer {
-	private Bitmap bild;
 	private Paint brush, scorePaint;
 	private Map<GameGraphics, Bitmap> graphicsMap = new LinkedHashMap<GameGraphics, Bitmap>();
 
@@ -67,8 +65,6 @@ public class GameRenderer {
 
 		for (GameObject obj : gameState.getObjects()) {
 			float diff = obj.getGameGraphics().getSize();
-			float x = obj.getPosition().getxPosition() - diff;
-			float y = obj.getPosition().getyPosition() - diff;
 			canvas.drawCircle(obj.getPosition().getxPosition(), obj
 					.getPosition().getyPosition(), diff, brush);
 			canvas.drawBitmap(graphicsMap.get(obj.getGameGraphics()), obj
