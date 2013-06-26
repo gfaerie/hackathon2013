@@ -11,9 +11,10 @@ import android.view.View;
 
 public class GameView extends View {
 	private Timer timer;
-	private GameState gameState;
+	private GameState state;
 	private GameRenderer renderer;
 	private float x,y;
+	private long currentWall;
 
 	public GameView(Context context, GameRenderer gameRenderer) {
 		super(context);
@@ -38,15 +39,15 @@ public class GameView extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		renderer.render(gameState, canvas);
+		renderer.render(state, canvas);
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		if (gameState == null) {
+		if (state == null) {
 			int canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
 			int canvasHeight = MeasureSpec.getSize(heightMeasureSpec);
-			gameState = new GameState(canvasWidth, canvasHeight);
+			state = new GameState(canvasWidth, canvasHeight);
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
@@ -56,11 +57,13 @@ public class GameView extends View {
 
 	    switch (event.getAction()) {
 	        case MotionEvent.ACTION_DOWN:
+	        	currentWall = state.addMobileWall(new GamePosition((int)event.getX(), (int)event.getY()));
 	        	x=event.getX();
 	        	y=event.getY();
 	            break;
 
 	        case MotionEvent.ACTION_MOVE:
+	        	state.updateWallPosition(currentWall, new GamePosition((int)event.getX(), (int)event.getY()));
 	            break;
 
 	        case MotionEvent.ACTION_UP:
