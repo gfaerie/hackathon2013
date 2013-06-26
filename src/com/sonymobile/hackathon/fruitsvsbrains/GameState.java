@@ -20,17 +20,20 @@ public class GameState {
 	private GameStateReaper reaper;
 	private MovementHandler movementHandler;
 	private WallReflectionHandler collisionHandler;
+	private BrainAttractionHandler brainAttractionHandler;
 
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.reaper = new GameStateReaper();
 		this.movementHandler = new MovementHandler();
-		this.collisionHandler= new WallReflectionHandler();
+		this.collisionHandler = new WallReflectionHandler();
+		this.brainAttractionHandler = new BrainAttractionHandler(7500);
 	}
 
 	public void update() {
 		reaper.reapObjects(this);
+		brainAttractionHandler.doBrainAttraction(this);
 		movementHandler.moveObjects(this);
 		collisionHandler.handleCollisions(this);
 	}
@@ -67,7 +70,8 @@ public class GameState {
 		return objects.get(id);
 	}
 
-	public long addObject(GameGraphics graphics, GamePosition position, GameObjectType type) {
+	public long addObject(GameGraphics graphics, GamePosition position,
+			GameObjectType type) {
 		GameObject gameObject = new GameObject(graphics, position, type);
 		objects.put(gameObject.getId(), gameObject);
 		return gameObject.getId();

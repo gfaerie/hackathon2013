@@ -20,5 +20,8 @@ public class GameMovement {
 		return "GameMovement [xSpeed=" + xSpeed + ", ySpeed=" + ySpeed + "]";
 	}
 	
-	
+	public void update(float x, float y){
+		xSpeed+=x;
+		ySpeed+=y;
+	}
 }
