@@ -4,6 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.View;
 
 public class GameView extends View {
@@ -27,6 +29,11 @@ public class GameView extends View {
 	public void pause() {
 		timer.cancel();
 		timer = null;
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		canvas.drawText("Fruits vs Brains: "+System.currentTimeMillis(), 100, 100, new Paint());
 	}
 	
 
