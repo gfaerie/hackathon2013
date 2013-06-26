@@ -36,6 +36,11 @@ public class GameState {
 		this.wallReflectionHandler= new WallReflectionHandler();
 	}
 
+	public void clear() {
+		walls.clear();
+		objects.clear();
+	}
+
 	public void update() {
 		reaper.reapObjects(this);
 		brainAttractionHandler.doBrainAttraction(this);
