@@ -55,6 +55,8 @@ public class GameState {
 		targetScore = 0;
 		currentScore = 0;
 		this.leveln = leveln;
+		GameLevel.buildLevel(this.leveln, this);
+
 	}
 
 	public void update() {
@@ -118,14 +120,8 @@ public class GameState {
 	public void increaseScore() {
 		this.currentScore++;
 		if (this.currentScore >=this.targetScore) {
-			leveln+=1;
-			setLevel(leveln);
+			newLevel(leveln);
 		}
-	}
-	
-	public void setLevel(int level){
-		GameLevel.buildLevel(level, this);
-
 	}
 
 	public int getRemainingFruits() {
