@@ -62,7 +62,7 @@ public class GameRenderer {
 				brush.setColor(Color.CYAN);
 			} else {
 				brush.setAlpha(255);
-				brush.setColor(Color.GREEN);
+				brush.setColor(Color.DKGRAY);
 			}
 			canvas.drawLine(wall.getStart().getxPosition(), wall.getStart()
 					.getyPosition(), wall.getEnd().getxPosition(), wall
