@@ -107,10 +107,10 @@ public class CollisionHandler {
 			GamePosition startTwo, GamePosition endTwo) {
 		double[] matrixOne = new double[2];
 		double[] matrixTwo = new double[2];
-		matrixOne[0] = endOne.getxPosition() - endOne.getxPosition();
-		matrixOne[1] = endOne.getyPosition() - endTwo.getyPosition();
-		matrixTwo[0] = endTwo.getxPosition() - endTwo.getxPosition();
-		matrixTwo[1] = endTwo.getyPosition() - endTwo.getyPosition();
+		matrixOne[0] = endOne.getxPosition() - startOne.getxPosition();
+		matrixOne[1] = endOne.getyPosition() - startOne.getyPosition();
+		matrixTwo[0] = endTwo.getxPosition() - startTwo.getxPosition();
+		matrixTwo[1] = endTwo.getyPosition() - startTwo.getyPosition();
 		double dot = matrixOne[0] * matrixTwo[0] + matrixOne[1] * matrixTwo[1];
 		return dot;
 	}
