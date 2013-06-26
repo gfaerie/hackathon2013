@@ -22,8 +22,6 @@ public class GameLevel {
 	public static void buildLevel(int leveln, GameState state) {
 		float canvasWidth = state.getxSize();
 		float canvasHeight = state.getySize();
-
-		state.newLevel(leveln);
 		switch (leveln) {
 		case 1:
 			GameLevel.addEdgeWalls(state);

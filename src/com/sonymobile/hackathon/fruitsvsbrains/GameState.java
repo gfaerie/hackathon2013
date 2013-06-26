@@ -56,7 +56,6 @@ public class GameState {
 		currentScore = 0;
 		this.leveln = leveln;
 		GameLevel.buildLevel(this.leveln, this);
-
 	}
 
 	public void update() {
