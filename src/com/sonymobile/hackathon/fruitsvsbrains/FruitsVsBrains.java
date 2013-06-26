@@ -12,7 +12,8 @@ public class FruitsVsBrains extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gameRenderer = new GameRenderer(this);
-		gameView = new GameView(this, gameRenderer);
+		gameView = new GameView(this);
+		gameView.setGameRenderer(gameRenderer);
 		setContentView(gameView);
 	}
 

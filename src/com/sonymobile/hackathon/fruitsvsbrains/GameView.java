@@ -13,11 +13,13 @@ public class GameView extends View {
 	private Timer timer;
 	private GameState state;
 	private GameRenderer renderer;
-	private float x,y;
-	private long currentWall;
+	private long currentWall = -1;
 
-	public GameView(Context context, GameRenderer gameRenderer) {
+	public GameView(Context context) {
 		super(context);
+	}
+
+	public void setGameRenderer(GameRenderer gameRenderer) {
 		this.renderer = gameRenderer;
 	}
 
@@ -53,29 +55,32 @@ public class GameView extends View {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		//Log.d("sb", "x: " + event.getX() + " y:" + event.getY());
-
 	    switch (event.getAction()) {
 	        case MotionEvent.ACTION_DOWN:
-	        	currentWall = state.addWall(new GamePosition((int)event.getX(), (int)event.getY()));
-	        	x=event.getX();
-	        	y=event.getY();
+	        	if (currentWall == -1)
+	        		currentWall = state.addWall(new GamePosition((int)event.getX(), (int)event.getY()), GameWallType.IN_PROGRESS);
+	        	else
+	        		Log.i("fb", "invalid DOWN");
 	            break;
 
 	        case MotionEvent.ACTION_MOVE:
-	        	state.updateWallPosition(currentWall, new GamePosition((int)event.getX(), (int)event.getY()));
+	        	state.getWall(currentWall).setEnd(new GamePosition((int)event.getX(), (int)event.getY()));
 	            break;
 
 	        case MotionEvent.ACTION_UP:
-	        	Log.i("fb", "new line length=" + state.getWall(currentWall).getLength());
-	        	if (state.getWall(currentWall).getLength() < 50) {
-	        		state.deleteWall(currentWall);
-	        	}
+	        	if (currentWall != -1) {
+		        	Log.i("fb", "new line length=" + state.getWall(currentWall).getLength());
+		        	if (state.getWall(currentWall).getLength() < 50)
+		        		state.deleteWall(currentWall);
+		        	else
+		        		state.getWall(currentWall).setType(GameWallType.DONE);
+		        	currentWall = -1;
+	        	} else
+	        		Log.i("fb", "invalid UP");
 	            break;
 	    }
 
 		//TODO : Anders
 		return true;
 	}
-
 }
