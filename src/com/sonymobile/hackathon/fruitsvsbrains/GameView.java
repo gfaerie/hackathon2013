@@ -112,6 +112,7 @@ public class GameView extends View {
 	}
 
 	private void addFruit(int x, int y) {
+		state.setRemainingFruits(state.getRemainingFruits() - 1);
 		GameGraphics fruit = GameGraphics.values()[rand.nextInt(3)];
 		long object = state.addObject(fruit, new GamePosition(x,y), GameObjectType.FRUIT);
 		state.getObject(object).setGameMovement(new GameMovement(fruit.getSpeed(),fruit.getSpeed()));
