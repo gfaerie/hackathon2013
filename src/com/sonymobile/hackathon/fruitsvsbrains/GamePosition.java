@@ -1,20 +1,20 @@
 package com.sonymobile.hackathon.fruitsvsbrains;
 
 public class GamePosition {
-	private float xPosition;
-	private float yPosition;
+	private int xPosition;
+	private int yPosition;
 
-	public GamePosition(float xPosition, float yPosition) {
+	public GamePosition(int xPosition, int yPosition) {
 		super();
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
 
-	public float getxPosition() {
+	public int getxPosition() {
 		return xPosition;
 	}
 
-	public float getyPosition() {
+	public int getyPosition() {
 		return yPosition;
 	}
 

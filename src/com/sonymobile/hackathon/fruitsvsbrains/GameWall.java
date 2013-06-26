@@ -14,6 +14,10 @@ public class GameWall {
 	public GamePosition getEnd() {
 		return end;
 	}
+	public void setEnd(GamePosition end) {
+		this.end = end;
+	}
+	
 	
 	
 	

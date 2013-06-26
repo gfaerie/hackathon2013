@@ -15,7 +15,8 @@ public class GameState {
 	private final int ySize;
 	
 	private List<GameWall> staticWalls = new LinkedList<GameWall>();
-	
+	private List<GameWall> mobileWalls = new LinkedList<GameWall>();
+
 	public GameState(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
@@ -29,6 +30,28 @@ public class GameState {
 		return ySize;
 	}
 
+	public List<GameWall> getStaticWalls() {
+		return staticWalls;
+	}
+
+	public List<GameWall> getMobileWalls() {
+		return mobileWalls;
+	}
+	
+	public void updateLastWall(GamePosition endPosition){
+		if(!mobileWalls.isEmpty()){
+			mobileWalls.get(0).setEnd(endPosition);
+		}
+	}
+	
+	public void addMobileWall(GamePosition startPosition){
+		mobileWalls.add(new GameWall(startPosition, startPosition));
+	}
+	
+	
+	
+
+	
 	
 	
 	
