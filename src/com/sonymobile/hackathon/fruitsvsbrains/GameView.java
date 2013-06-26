@@ -27,19 +27,21 @@ public class GameView extends View {
 	}
 
 	public void resume() {
-		timer = new Timer();
+		this.timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				postInvalidate();
 			}
 		};
-		timer.schedule(task, 1000, 16);
+		this.timer.schedule(task, 1000, 16);
 	}
 
 	public void pause() {
-		timer.cancel();
-		timer = null;
+		if (this.timer != null) {
+			this.timer.cancel();
+			this.timer = null;
+		}
 	}
 
 	@Override
@@ -66,47 +68,50 @@ public class GameView extends View {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		int x = (int)event.getX();
-		int y = (int)event.getY();
+		int x = (int) event.getX();
+		int y = (int) event.getY();
 
-	    switch (event.getAction()) {
-	        case MotionEvent.ACTION_DOWN:
-	        	if (!insideStartArea(x, y)) {
-		        	if (currentWall == -1)
-		        		currentWall = state.addWall(new GamePosition(x, y), GameWallType.IN_PROGRESS);
-		        	else
-		        		Log.i("fruits", "invalid DOWN");
-	        	}
-	            break;
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			if (!insideStartArea(x, y)) {
+				if (currentWall == -1)
+					currentWall = state.addWall(new GamePosition(x, y),
+							GameWallType.IN_PROGRESS);
+				else
+					Log.i("fruits", "invalid DOWN");
+			}
+			break;
 
-	        case MotionEvent.ACTION_MOVE:
-	        	if (!insideStartArea(x, y) && currentWall != -1) {
-	        		state.getWall(currentWall).setEnd(new GamePosition(x, y));
-	        	}
-	        	break;
+		case MotionEvent.ACTION_MOVE:
+			if (!insideStartArea(x, y) && currentWall != -1) {
+				state.getWall(currentWall).setEnd(new GamePosition(x, y));
+			}
+			break;
 
-	        case MotionEvent.ACTION_UP:
-	        	if (!insideStartArea(x, y)) {
-		        	if (currentWall != -1) {
-		        		Log.i("fruits", "new line length=" + state.getWall(currentWall).getLength());
-			        	if (state.getWall(currentWall).getLength() < 50)
-			        		state.deleteWall(currentWall);
-			        	else
-			        		state.getWall(currentWall).setType(GameWallType.DONE);
-			        	currentWall = -1;
-		        	} else
-		        		Log.i("fruits", "invalid UP");
-	        	} else {
-	        		if (currentWall != -1) {
-	        			state.deleteWall(currentWall);
-	        			currentWall = -1;
-	        		} else {
-	        			Log.i("fruits", "click");
-	        			addFruit(x, y);
-	        		}
-	        	}
-	            break;
-	    }
+		case MotionEvent.ACTION_UP:
+			if (!insideStartArea(x, y)) {
+				if (currentWall != -1) {
+					Log.i("fruits",
+							"new line length="
+									+ state.getWall(currentWall).getLength());
+					if (state.getWall(currentWall).getLength() < 50)
+						state.deleteWall(currentWall);
+					else
+						state.getWall(currentWall).setType(GameWallType.DONE);
+					currentWall = -1;
+				} else
+					Log.i("fruits", "invalid UP");
+			} else {
+				if (currentWall != -1) {
+					state.deleteWall(currentWall);
+					currentWall = -1;
+				} else {
+					Log.i("fruits", "click");
+					addFruit(x, y);
+				}
+			}
+			break;
+		}
 
 		return true;
 	}
@@ -114,7 +119,9 @@ public class GameView extends View {
 	private void addFruit(int x, int y) {
 		state.setRemainingFruits(state.getRemainingFruits() - 1);
 		GameGraphics fruit = GameGraphics.values()[rand.nextInt(3)];
-		long object = state.addObject(fruit, new GamePosition(x,y), GameObjectType.FRUIT);
-		state.getObject(object).setGameMovement(new GameMovement(fruit.getSpeed(),fruit.getSpeed()));
+		long object = state.addObject(fruit, new GamePosition(x, y),
+				GameObjectType.FRUIT);
+		state.getObject(object).setGameMovement(
+				new GameMovement(fruit.getSpeed(), fruit.getSpeed()));
 	}
 }
